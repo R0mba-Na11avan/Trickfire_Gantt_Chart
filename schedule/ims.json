@@ -1,0 +1,1018 @@
+{
+  "version": 1,
+  "title": "URC 2027 Integrated Master Schedule",
+  "team": "TrickFire Robotics",
+  "rangeStart": "2026-09-01",
+  "rangeEnd": "2027-06-30",
+  "statusDate": "2026-11-13",
+  "logo": null,
+  "tasks": [
+    {
+      "id": "t_pm",
+      "name": "Program Management & URC Deliverables",
+      "level": 0,
+      "start": "2026-09-01",
+      "end": "2027-06-03",
+      "progress": 43,
+      "owner": "Leadership",
+      "deps": [],
+      "milestone": false,
+      "urc": false,
+      "collapsed": false,
+      "notes": ""
+    },
+    {
+      "id": "t_rules",
+      "name": "URC 2027 rules & mission analysis",
+      "level": 1,
+      "start": "2026-09-01",
+      "end": "2026-09-18",
+      "progress": 100,
+      "owner": "Systems",
+      "deps": [],
+      "milestone": false,
+      "urc": true,
+      "collapsed": false,
+      "notes": ""
+    },
+    {
+      "id": "t_pdrdoc",
+      "name": "PDR package (Gantt, architecture, budget)",
+      "level": 1,
+      "start": "2026-11-02",
+      "end": "2026-11-27",
+      "progress": 55,
+      "owner": "Leadership",
+      "deps": [
+        {
+          "id": "t_rules",
+          "lag": 0
+        }
+      ],
+      "milestone": false,
+      "urc": true,
+      "collapsed": false,
+      "notes": ""
+    },
+    {
+      "id": "t_pdr",
+      "name": "PDR submission (set date)",
+      "level": 1,
+      "start": "2026-12-01",
+      "end": "2026-12-01",
+      "progress": 0,
+      "owner": "Leadership",
+      "deps": [
+        {
+          "id": "t_pdrdoc",
+          "lag": 0
+        }
+      ],
+      "milestone": true,
+      "urc": true,
+      "collapsed": false,
+      "notes": "Placeholder date: confirm against the official URC 2027 schedule."
+    },
+    {
+      "id": "t_sarprep",
+      "name": "SAR video & report",
+      "level": 1,
+      "start": "2027-04-19",
+      "end": "2027-05-07",
+      "progress": 0,
+      "owner": "Systems",
+      "deps": [
+        {
+          "id": "t_int_sw",
+          "lag": 0
+        }
+      ],
+      "milestone": false,
+      "urc": true,
+      "collapsed": false,
+      "notes": ""
+    },
+    {
+      "id": "t_sar",
+      "name": "SAR submission (set date)",
+      "level": 1,
+      "start": "2027-05-10",
+      "end": "2027-05-10",
+      "progress": 0,
+      "owner": "Systems",
+      "deps": [
+        {
+          "id": "t_sarprep",
+          "lag": 0
+        }
+      ],
+      "milestone": true,
+      "urc": true,
+      "collapsed": false,
+      "notes": "Placeholder date: confirm against the official URC 2027 schedule."
+    },
+    {
+      "id": "t_ship",
+      "name": "Pack, ship & travel to competition site",
+      "level": 1,
+      "start": "2027-05-25",
+      "end": "2027-06-02",
+      "progress": 0,
+      "owner": "Leadership",
+      "deps": [
+        {
+          "id": "t_signoff",
+          "lag": 0
+        }
+      ],
+      "milestone": false,
+      "urc": true,
+      "collapsed": false,
+      "notes": ""
+    },
+    {
+      "id": "t_comp",
+      "name": "URC 2027 competition (set date)",
+      "level": 1,
+      "start": "2027-06-03",
+      "end": "2027-06-03",
+      "progress": 0,
+      "owner": "Leadership",
+      "deps": [
+        {
+          "id": "t_ship",
+          "lag": 0
+        }
+      ],
+      "milestone": true,
+      "urc": true,
+      "collapsed": false,
+      "notes": "Placeholder date: confirm against the official URC 2027 schedule."
+    },
+    {
+      "id": "t_ch",
+      "name": "Chassis & Drivetrain",
+      "level": 0,
+      "start": "2026-09-21",
+      "end": "2027-02-26",
+      "progress": 33,
+      "owner": "Mechanical",
+      "deps": [],
+      "milestone": false,
+      "urc": false,
+      "collapsed": false,
+      "notes": ""
+    },
+    {
+      "id": "t_ch_req",
+      "name": "Chassis requirements & trade study",
+      "level": 1,
+      "start": "2026-09-21",
+      "end": "2026-10-02",
+      "progress": 100,
+      "owner": "Mechanical",
+      "deps": [
+        {
+          "id": "t_rules",
+          "lag": 0
+        }
+      ],
+      "milestone": false,
+      "urc": false,
+      "collapsed": false,
+      "notes": ""
+    },
+    {
+      "id": "t_ch_cad",
+      "name": "Frame & suspension CAD",
+      "level": 1,
+      "start": "2026-10-03",
+      "end": "2026-11-06",
+      "progress": 100,
+      "owner": "Mechanical",
+      "deps": [
+        {
+          "id": "t_ch_req",
+          "lag": 0
+        }
+      ],
+      "milestone": false,
+      "urc": false,
+      "collapsed": false,
+      "notes": ""
+    },
+    {
+      "id": "t_ch_review",
+      "name": "Design review & BOM freeze",
+      "level": 1,
+      "start": "2026-11-07",
+      "end": "2026-11-20",
+      "progress": 40,
+      "owner": "Mechanical",
+      "deps": [
+        {
+          "id": "t_ch_cad",
+          "lag": 0
+        }
+      ],
+      "milestone": false,
+      "urc": false,
+      "collapsed": false,
+      "notes": ""
+    },
+    {
+      "id": "t_ch_fab",
+      "name": "Frame & suspension fabrication",
+      "level": 1,
+      "start": "2026-11-21",
+      "end": "2027-01-15",
+      "progress": 0,
+      "owner": "Mechanical",
+      "deps": [
+        {
+          "id": "t_ch_review",
+          "lag": 0
+        }
+      ],
+      "milestone": false,
+      "urc": false,
+      "collapsed": false,
+      "notes": ""
+    },
+    {
+      "id": "t_ch_drive",
+      "name": "Drivetrain assembly & motor integration",
+      "level": 1,
+      "start": "2027-01-16",
+      "end": "2027-02-12",
+      "progress": 0,
+      "owner": "Mechanical",
+      "deps": [
+        {
+          "id": "t_ch_fab",
+          "lag": 0
+        }
+      ],
+      "milestone": false,
+      "urc": false,
+      "collapsed": false,
+      "notes": ""
+    },
+    {
+      "id": "t_ch_test",
+      "name": "Mobility bench & field test",
+      "level": 1,
+      "start": "2027-02-13",
+      "end": "2027-02-26",
+      "progress": 0,
+      "owner": "Mechanical",
+      "deps": [
+        {
+          "id": "t_ch_drive",
+          "lag": 0
+        }
+      ],
+      "milestone": false,
+      "urc": false,
+      "collapsed": false,
+      "notes": ""
+    },
+    {
+      "id": "t_arm",
+      "name": "Robotic Arm & End Effector",
+      "level": 0,
+      "start": "2026-10-12",
+      "end": "2027-02-24",
+      "progress": 29,
+      "owner": "Mechanical",
+      "deps": [],
+      "milestone": false,
+      "urc": false,
+      "collapsed": false,
+      "notes": ""
+    },
+    {
+      "id": "t_arm_cad",
+      "name": "Arm links, joints & end effector CAD",
+      "level": 1,
+      "start": "2026-10-12",
+      "end": "2026-11-27",
+      "progress": 60,
+      "owner": "Mechanical",
+      "deps": [
+        {
+          "id": "t_rules",
+          "lag": 0
+        }
+      ],
+      "milestone": false,
+      "urc": false,
+      "collapsed": false,
+      "notes": ""
+    },
+    {
+      "id": "t_arm_fab",
+      "name": "Arm & end effector fabrication",
+      "level": 1,
+      "start": "2027-01-04",
+      "end": "2027-02-05",
+      "progress": 0,
+      "owner": "Mechanical",
+      "deps": [
+        {
+          "id": "t_arm_cad",
+          "lag": 0
+        }
+      ],
+      "milestone": false,
+      "urc": false,
+      "collapsed": false,
+      "notes": ""
+    },
+    {
+      "id": "t_arm_ctrl",
+      "name": "Arm motor control & IK tuning",
+      "level": 1,
+      "start": "2027-02-08",
+      "end": "2027-02-24",
+      "progress": 0,
+      "owner": "Software",
+      "deps": [
+        {
+          "id": "t_arm_fab",
+          "lag": 0
+        }
+      ],
+      "milestone": false,
+      "urc": false,
+      "collapsed": false,
+      "notes": ""
+    },
+    {
+      "id": "t_sci",
+      "name": "Science / Life Detection Payload",
+      "level": 0,
+      "start": "2026-10-12",
+      "end": "2027-02-24",
+      "progress": 28,
+      "owner": "Science",
+      "deps": [],
+      "milestone": false,
+      "urc": false,
+      "collapsed": false,
+      "notes": ""
+    },
+    {
+      "id": "t_sci_sample",
+      "name": "Sample acquisition & handling",
+      "level": 1,
+      "start": "2026-10-12",
+      "end": "2027-02-05",
+      "progress": 26,
+      "owner": "Science",
+      "deps": [],
+      "milestone": false,
+      "urc": false,
+      "collapsed": false,
+      "notes": ""
+    },
+    {
+      "id": "t_sci_drill",
+      "name": "Drill / scoop design",
+      "level": 2,
+      "start": "2026-10-12",
+      "end": "2026-11-27",
+      "progress": 45,
+      "owner": "Science",
+      "deps": [
+        {
+          "id": "t_rules",
+          "lag": 0
+        }
+      ],
+      "milestone": false,
+      "urc": false,
+      "collapsed": false,
+      "notes": ""
+    },
+    {
+      "id": "t_sci_fab",
+      "name": "Sample system fabrication & assembly",
+      "level": 2,
+      "start": "2027-01-04",
+      "end": "2027-02-05",
+      "progress": 0,
+      "owner": "Science",
+      "deps": [
+        {
+          "id": "t_sci_drill",
+          "lag": 0
+        }
+      ],
+      "milestone": false,
+      "urc": false,
+      "collapsed": false,
+      "notes": ""
+    },
+    {
+      "id": "t_sci_inst",
+      "name": "Life-detection instruments",
+      "level": 1,
+      "start": "2026-10-12",
+      "end": "2027-01-22",
+      "progress": 33,
+      "owner": "Science",
+      "deps": [],
+      "milestone": false,
+      "urc": false,
+      "collapsed": false,
+      "notes": ""
+    },
+    {
+      "id": "t_sci_sens",
+      "name": "Sensor suite selection (spectrometer, fluorescence)",
+      "level": 2,
+      "start": "2026-10-12",
+      "end": "2026-11-06",
+      "progress": 100,
+      "owner": "Science",
+      "deps": [
+        {
+          "id": "t_rules",
+          "lag": 0
+        }
+      ],
+      "milestone": false,
+      "urc": false,
+      "collapsed": false,
+      "notes": ""
+    },
+    {
+      "id": "t_sci_proto",
+      "name": "Instrument prototype & calibration",
+      "level": 2,
+      "start": "2026-11-09",
+      "end": "2027-01-22",
+      "progress": 10,
+      "owner": "Science",
+      "deps": [
+        {
+          "id": "t_sci_sens",
+          "lag": 0
+        }
+      ],
+      "milestone": false,
+      "urc": false,
+      "collapsed": false,
+      "notes": ""
+    },
+    {
+      "id": "t_sci_done",
+      "name": "Science payload bench test",
+      "level": 1,
+      "start": "2027-02-08",
+      "end": "2027-02-24",
+      "progress": 0,
+      "owner": "Science",
+      "deps": [
+        {
+          "id": "t_sci_fab",
+          "lag": 0
+        },
+        {
+          "id": "t_sci_proto",
+          "lag": 0
+        }
+      ],
+      "milestone": false,
+      "urc": false,
+      "collapsed": false,
+      "notes": ""
+    },
+    {
+      "id": "t_el",
+      "name": "Electrical & Power",
+      "level": 0,
+      "start": "2026-10-12",
+      "end": "2027-02-24",
+      "progress": 21,
+      "owner": "Electrical",
+      "deps": [],
+      "milestone": false,
+      "urc": false,
+      "collapsed": false,
+      "notes": ""
+    },
+    {
+      "id": "t_pwr",
+      "name": "Power system",
+      "level": 1,
+      "start": "2026-10-12",
+      "end": "2027-02-05",
+      "progress": 29,
+      "owner": "Electrical",
+      "deps": [],
+      "milestone": false,
+      "urc": false,
+      "collapsed": false,
+      "notes": ""
+    },
+    {
+      "id": "t_pwr_pdb",
+      "name": "Power distribution board design",
+      "level": 2,
+      "start": "2026-10-12",
+      "end": "2026-11-27",
+      "progress": 50,
+      "owner": "Electrical",
+      "deps": [
+        {
+          "id": "t_rules",
+          "lag": 0
+        }
+      ],
+      "milestone": false,
+      "urc": false,
+      "collapsed": false,
+      "notes": ""
+    },
+    {
+      "id": "t_pwr_fab",
+      "name": "Battery pack & PCB fabrication",
+      "level": 2,
+      "start": "2027-01-04",
+      "end": "2027-02-05",
+      "progress": 0,
+      "owner": "Electrical",
+      "deps": [
+        {
+          "id": "t_pwr_pdb",
+          "lag": 0
+        }
+      ],
+      "milestone": false,
+      "urc": false,
+      "collapsed": false,
+      "notes": ""
+    },
+    {
+      "id": "t_mc_design",
+      "name": "Motor controller board design",
+      "level": 1,
+      "start": "2026-11-02",
+      "end": "2026-12-18",
+      "progress": 25,
+      "owner": "Electrical",
+      "deps": [
+        {
+          "id": "t_rules",
+          "lag": 0
+        }
+      ],
+      "milestone": false,
+      "urc": false,
+      "collapsed": false,
+      "notes": ""
+    },
+    {
+      "id": "t_mc_fab",
+      "name": "Controller board fabrication & test",
+      "level": 1,
+      "start": "2027-01-11",
+      "end": "2027-02-12",
+      "progress": 0,
+      "owner": "Electrical",
+      "deps": [
+        {
+          "id": "t_mc_design",
+          "lag": 0
+        }
+      ],
+      "milestone": false,
+      "urc": false,
+      "collapsed": false,
+      "notes": ""
+    },
+    {
+      "id": "t_el_harness",
+      "name": "Wiring harness build",
+      "level": 1,
+      "start": "2027-02-15",
+      "end": "2027-02-24",
+      "progress": 0,
+      "owner": "Electrical",
+      "deps": [
+        {
+          "id": "t_pwr_fab",
+          "lag": 0
+        },
+        {
+          "id": "t_mc_fab",
+          "lag": 0
+        }
+      ],
+      "milestone": false,
+      "urc": false,
+      "collapsed": false,
+      "notes": ""
+    },
+    {
+      "id": "t_sw",
+      "name": "Software, Autonomy & Navigation",
+      "level": 0,
+      "start": "2026-09-21",
+      "end": "2027-03-12",
+      "progress": 27,
+      "owner": "Software",
+      "deps": [],
+      "milestone": false,
+      "urc": false,
+      "collapsed": false,
+      "notes": ""
+    },
+    {
+      "id": "t_sw_arch",
+      "name": "Software architecture & ROS 2 framework",
+      "level": 1,
+      "start": "2026-09-21",
+      "end": "2026-10-16",
+      "progress": 100,
+      "owner": "Software",
+      "deps": [
+        {
+          "id": "t_rules",
+          "lag": 0
+        }
+      ],
+      "milestone": false,
+      "urc": false,
+      "collapsed": false,
+      "notes": ""
+    },
+    {
+      "id": "t_sw_auto",
+      "name": "Autonomy & navigation",
+      "level": 1,
+      "start": "2026-10-19",
+      "end": "2027-03-12",
+      "progress": 14,
+      "owner": "Software",
+      "deps": [],
+      "milestone": false,
+      "urc": false,
+      "collapsed": false,
+      "notes": ""
+    },
+    {
+      "id": "t_sw_sim",
+      "name": "Simulation environment",
+      "level": 2,
+      "start": "2026-10-19",
+      "end": "2026-11-20",
+      "progress": 60,
+      "owner": "Software",
+      "deps": [
+        {
+          "id": "t_sw_arch",
+          "lag": 0
+        }
+      ],
+      "milestone": false,
+      "urc": false,
+      "collapsed": false,
+      "notes": ""
+    },
+    {
+      "id": "t_sw_loc",
+      "name": "Localization & sensor fusion",
+      "level": 2,
+      "start": "2026-11-23",
+      "end": "2027-01-29",
+      "progress": 0,
+      "owner": "Software",
+      "deps": [
+        {
+          "id": "t_sw_sim",
+          "lag": 0
+        }
+      ],
+      "milestone": false,
+      "urc": false,
+      "collapsed": false,
+      "notes": ""
+    },
+    {
+      "id": "t_sw_plan",
+      "name": "Path planning & obstacle avoidance",
+      "level": 2,
+      "start": "2027-02-01",
+      "end": "2027-03-12",
+      "progress": 0,
+      "owner": "Software",
+      "deps": [
+        {
+          "id": "t_sw_loc",
+          "lag": 0
+        }
+      ],
+      "milestone": false,
+      "urc": false,
+      "collapsed": false,
+      "notes": ""
+    },
+    {
+      "id": "t_sw_tele",
+      "name": "Teleoperation & operator GUI",
+      "level": 1,
+      "start": "2026-10-19",
+      "end": "2027-01-29",
+      "progress": 25,
+      "owner": "Software",
+      "deps": [
+        {
+          "id": "t_sw_arch",
+          "lag": 0
+        }
+      ],
+      "milestone": false,
+      "urc": false,
+      "collapsed": false,
+      "notes": ""
+    },
+    {
+      "id": "t_com",
+      "name": "Communications & Base Station",
+      "level": 0,
+      "start": "2026-10-12",
+      "end": "2027-02-19",
+      "progress": 18,
+      "owner": "Electrical",
+      "deps": [],
+      "milestone": false,
+      "urc": false,
+      "collapsed": false,
+      "notes": ""
+    },
+    {
+      "id": "t_com_base",
+      "name": "Link budget & base station design",
+      "level": 1,
+      "start": "2026-10-12",
+      "end": "2026-12-18",
+      "progress": 30,
+      "owner": "Electrical",
+      "deps": [
+        {
+          "id": "t_rules",
+          "lag": 0
+        }
+      ],
+      "milestone": false,
+      "urc": false,
+      "collapsed": false,
+      "notes": ""
+    },
+    {
+      "id": "t_com_fab",
+      "name": "Base station build & antenna tracker",
+      "level": 1,
+      "start": "2027-01-04",
+      "end": "2027-02-19",
+      "progress": 0,
+      "owner": "Electrical",
+      "deps": [
+        {
+          "id": "t_com_base",
+          "lag": 0
+        }
+      ],
+      "milestone": false,
+      "urc": false,
+      "collapsed": false,
+      "notes": ""
+    },
+    {
+      "id": "t_int",
+      "name": "System Integration & Test",
+      "level": 0,
+      "start": "2027-02-27",
+      "end": "2027-05-24",
+      "progress": 0,
+      "owner": "Systems",
+      "deps": [],
+      "milestone": false,
+      "urc": false,
+      "collapsed": false,
+      "notes": ""
+    },
+    {
+      "id": "t_int_mech",
+      "name": "Mechanical build-up & subsystem mounting",
+      "level": 1,
+      "start": "2027-02-27",
+      "end": "2027-03-12",
+      "progress": 0,
+      "owner": "Mechanical",
+      "deps": [
+        {
+          "id": "t_ch_test",
+          "lag": 0
+        },
+        {
+          "id": "t_arm_ctrl",
+          "lag": 0
+        },
+        {
+          "id": "t_sci_done",
+          "lag": 0
+        }
+      ],
+      "milestone": false,
+      "urc": false,
+      "collapsed": false,
+      "notes": ""
+    },
+    {
+      "id": "t_int_wire",
+      "name": "Harness & power-on integration",
+      "level": 1,
+      "start": "2027-03-13",
+      "end": "2027-03-26",
+      "progress": 0,
+      "owner": "Electrical",
+      "deps": [
+        {
+          "id": "t_int_mech",
+          "lag": 0
+        },
+        {
+          "id": "t_el_harness",
+          "lag": 0
+        },
+        {
+          "id": "t_com_fab",
+          "lag": 0
+        }
+      ],
+      "milestone": false,
+      "urc": false,
+      "collapsed": false,
+      "notes": ""
+    },
+    {
+      "id": "t_int_sw",
+      "name": "Software/hardware integration",
+      "level": 1,
+      "start": "2027-03-27",
+      "end": "2027-04-16",
+      "progress": 0,
+      "owner": "Software",
+      "deps": [
+        {
+          "id": "t_int_wire",
+          "lag": 0
+        },
+        {
+          "id": "t_sw_plan",
+          "lag": 0
+        },
+        {
+          "id": "t_sw_tele",
+          "lag": 0
+        }
+      ],
+      "milestone": false,
+      "urc": false,
+      "collapsed": false,
+      "notes": ""
+    },
+    {
+      "id": "t_int_test",
+      "name": "Full-system test campaign",
+      "level": 1,
+      "start": "2027-04-17",
+      "end": "2027-05-07",
+      "progress": 0,
+      "owner": "Systems",
+      "deps": [
+        {
+          "id": "t_int_sw",
+          "lag": 0
+        }
+      ],
+      "milestone": false,
+      "urc": false,
+      "collapsed": false,
+      "notes": ""
+    },
+    {
+      "id": "t_dry",
+      "name": "URC mission dry runs",
+      "level": 1,
+      "start": "2027-05-08",
+      "end": "2027-05-23",
+      "progress": 0,
+      "owner": "Systems",
+      "deps": [],
+      "milestone": false,
+      "urc": true,
+      "collapsed": false,
+      "notes": ""
+    },
+    {
+      "id": "t_dry_sci",
+      "name": "Science mission dry run",
+      "level": 2,
+      "start": "2027-05-08",
+      "end": "2027-05-11",
+      "progress": 0,
+      "owner": "Science",
+      "deps": [
+        {
+          "id": "t_int_test",
+          "lag": 0
+        }
+      ],
+      "milestone": false,
+      "urc": true,
+      "collapsed": false,
+      "notes": ""
+    },
+    {
+      "id": "t_dry_del",
+      "name": "Delivery mission dry run",
+      "level": 2,
+      "start": "2027-05-12",
+      "end": "2027-05-15",
+      "progress": 0,
+      "owner": "Mechanical",
+      "deps": [
+        {
+          "id": "t_dry_sci",
+          "lag": 0
+        }
+      ],
+      "milestone": false,
+      "urc": true,
+      "collapsed": false,
+      "notes": ""
+    },
+    {
+      "id": "t_dry_eq",
+      "name": "Equipment Servicing mission dry run",
+      "level": 2,
+      "start": "2027-05-16",
+      "end": "2027-05-19",
+      "progress": 0,
+      "owner": "Systems",
+      "deps": [
+        {
+          "id": "t_dry_del",
+          "lag": 0
+        }
+      ],
+      "milestone": false,
+      "urc": true,
+      "collapsed": false,
+      "notes": ""
+    },
+    {
+      "id": "t_dry_auto",
+      "name": "Autonomous Navigation mission dry run",
+      "level": 2,
+      "start": "2027-05-20",
+      "end": "2027-05-23",
+      "progress": 0,
+      "owner": "Software",
+      "deps": [
+        {
+          "id": "t_dry_eq",
+          "lag": 0
+        }
+      ],
+      "milestone": false,
+      "urc": true,
+      "collapsed": false,
+      "notes": ""
+    },
+    {
+      "id": "t_signoff",
+      "name": "Rover sign-off & pack-out ready (set date)",
+      "level": 1,
+      "start": "2027-05-24",
+      "end": "2027-05-24",
+      "progress": 0,
+      "owner": "Systems",
+      "deps": [
+        {
+          "id": "t_dry_auto",
+          "lag": 0
+        }
+      ],
+      "milestone": true,
+      "urc": true,
+      "collapsed": false,
+      "notes": "Placeholder date: confirm against the official URC 2027 schedule."
+    }
+  ]
+}

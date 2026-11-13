@@ -190,14 +190,18 @@
   let pendingScroll = false;
 
   function emptyState() {
-    const add = h('button', { type: 'button', class: 'btn primary' }, 'Add your first task');
+    const open = h('button', { type: 'button', class: 'btn primary' }, 'Open chart');
+    const team = h('button', { type: 'button', class: 'btn' }, 'Open team schedule');
+    const add = h('button', { type: 'button', class: 'btn' }, 'Start a new chart');
     const tpl = h('button', { type: 'button', class: 'btn' }, 'Load URC template');
+    open.addEventListener('click', () => $('file-json').click());
+    team.addEventListener('click', () => loadTeamSchedule());
     add.addEventListener('click', () => addTaskAfter(null));
     tpl.addEventListener('click', () => commit(M.sampleProject(), { select: null }));
     return h('div', { class: 'empty-state' },
-      h('h3', null, 'No tasks yet'),
-      h('p', null, 'Start a schedule from scratch or load the URC 2027 template and edit it.'),
-      add, tpl);
+      h('h3', null, 'No chart open'),
+      h('p', null, 'Open a shared chart file (.json), load the team schedule, or start from scratch.'),
+      open, team, add, tpl);
   }
 
   // Same format the native date inputs use, so summary rows line up visually with task rows.
@@ -480,7 +484,7 @@
     }
     $('st-save').textContent = saveInfo.ok
       ? (saveInfo.at ? 'Autosaved ' + saveInfo.at.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : 'Autosave on')
-      : 'Not saved (browser storage unavailable) - use File > Save JSON';
+      : 'Not saved (browser storage unavailable) - use File > Save chart';
   }
 
   function renderToolbar() {
@@ -804,8 +808,24 @@
     };
     fr.readAsText(f);
   }
+  // The shared schedule is a JSON file published next to the app (schedule/ims.json).
+  // fetch() of a local file is blocked over file://, so this only works on the hosted site.
+  const TEAM_SCHEDULE_URL = 'schedule/ims.json';
+  async function loadTeamSchedule() {
+    if (location.protocol === 'file:') {
+      toast('The team schedule loads from the hosted site only. Here, use Open chart and pick schedule/ims.json.', 'error');
+      return;
+    }
+    let p;
+    try {
+      const res = await fetch(TEAM_SCHEDULE_URL, { cache: 'no-store' });
+      if (!res.ok) throw new Error('Team schedule not found (' + res.status + ')');
+      p = TF.store.fromJSON(await res.text());
+    } catch (e) { toast(errMsg(e), 'error'); return; }
+    replaceWith(p, 'Open team schedule', 'The team schedule replaces the current schedule. You can undo this.');
+  }
   function wireFiles() {
-    $('file-json').addEventListener('change', (e) => readFile(e.target, (t) => TF.store.fromJSON(t), 'Open JSON', 'Opening'));
+    $('file-json').addEventListener('change', (e) => readFile(e.target, (t) => TF.store.fromJSON(t), 'Open chart', 'Opening'));
     $('file-csv').addEventListener('change', (e) => readFile(e.target, (t) => TF.store.fromCSV(t), 'Import CSV', 'Importing'));
   }
   function fileMenuAction(a) {
@@ -813,6 +833,7 @@
       case 'new': replaceWith(M.newProject(), 'New blank schedule', 'A new blank schedule replaces the current one. You can undo this.'); break;
       case 'template': replaceWith(M.sampleProject(), 'Load URC template', 'The URC 2027 template replaces the current schedule. You can undo this.'); break;
       case 'open': $('file-json').click(); break;
+      case 'team': loadTeamSchedule(); break;
       case 'save': saveJson(); break;
       case 'import': $('file-csv').click(); break;
       case 'csv': exportCsv(); break;
@@ -944,7 +965,7 @@
 
     let project = null;
     try { project = TF.store.load(); } catch (e) { project = null; }
-    if (!project) project = M.sampleProject();
+    if (!project) project = M.newProject();   // nothing autosaved: start empty, the grid offers Open chart
     state.project = project;
     history = TF.store.createHistory(project);
 

@@ -14,8 +14,16 @@ No install, no build: open `index.html` in Chrome or Edge.
 5. **Export PDR page** → Print / Save as PDF (destination "Save as PDF", margins None, background graphics on),
    or download PNG / SVG. Collapse summary groups to hide detail rows if the page gets crowded.
 
-Work autosaves in the browser. Use **File → Save JSON** to share the schedule with teammates
-(commit it or put it in the team drive) and **Open JSON** to load it. CSV import/export is there for spreadsheets.
+## Sharing
+
+Hosted app: https://r0mba-na11avan.github.io/Trickfire_Gantt_Chart/
+
+- Work autosaves in each person's browser only. The app starts empty until a chart is opened.
+- **File → Save chart** downloads the schedule as a `.json` file. Send it to a teammate; they use
+  **Open chart** to load it.
+- `schedule/ims.json` is the team schedule. **Open team schedule** on the hosted app loads the committed copy.
+  To publish an update, save the chart and commit it over `schedule/ims.json`.
+- No live co-editing: one person owns the master file at a time.
 
 The built-in template is a placeholder: task names, dates, owners and the "(set date)" milestones must be
 replaced with the team's real plan and the official URC deadlines.
