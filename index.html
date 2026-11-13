@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TrickFire Robotics - Schedule Editor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600&family=Overpass:wght@400;600;700&family=Roboto:wght@400;500;700&family=Roboto+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<!-- Icon sprite (all icons are simple 16px stroked paths) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="i-plus" viewBox="0 0 16 16"><path d="M8 3v10M3 8h10"/></symbol>
+    <symbol id="i-sub" viewBox="0 0 16 16"><path d="M3 2v8h5M11 7v6M8 10h6"/></symbol>
+    <symbol id="i-diamond" viewBox="0 0 16 16"><path d="M8 2l6 6-6 6-6-6z"/></symbol>
+    <symbol id="i-indent" viewBox="0 0 16 16"><path d="M2 3h12M7 7h7M7 11h7M2 6.5l3 2.5-3 2.5"/></symbol>
+    <symbol id="i-outdent" viewBox="0 0 16 16"><path d="M2 3h12M7 7h7M7 11h7M5 6.5L2 9l3 2.5"/></symbol>
+    <symbol id="i-up" viewBox="0 0 16 16"><path d="M8 13V3M3.5 7.5L8 3l4.5 4.5"/></symbol>
+    <symbol id="i-down" viewBox="0 0 16 16"><path d="M8 3v10M3.5 8.5L8 13l4.5-4.5"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 16 16"><path d="M3 4h10M6 4V2.5h4V4M4.5 4l.5 9.5h6l.5-9.5"/></symbol>
+    <symbol id="i-undo" viewBox="0 0 16 16"><path d="M3 6h7a3.5 3.5 0 010 7H6M3 6l3-3M3 6l3 3"/></symbol>
+    <symbol id="i-redo" viewBox="0 0 16 16"><path d="M13 6H6a3.5 3.5 0 000 7h4M13 6l-3-3M13 6l-3 3"/></symbol>
+    <symbol id="i-cal" viewBox="0 0 16 16"><path d="M2.5 4h11v9.5h-11zM2.5 7h11M5 2v3M11 2v3"/></symbol>
+    <symbol id="i-link" viewBox="0 0 16 16"><path d="M2 12h5V4h5M10 2l2 2-2 2"/></symbol>
+    <symbol id="i-flag" viewBox="0 0 16 16"><path d="M4 14V2M4 3h8l-2 3 2 3H4"/></symbol>
+    <symbol id="i-bolt" viewBox="0 0 16 16"><path d="M9 1.5L3.5 9H8l-1 5.5L12.5 7H8z"/></symbol>
+    <symbol id="i-file" viewBox="0 0 16 16"><path d="M4 1.5h5l3.5 3.5v9.5H4zM9 1.5V5h3.5"/></symbol>
+    <symbol id="i-gear" viewBox="0 0 16 16"><path d="M8 5.5a2.5 2.5 0 100 5 2.5 2.5 0 000-5zM8 1.5v2M8 12.5v2M1.5 8h2M12.5 8h2M3.4 3.4l1.4 1.4M11.2 11.2l1.4 1.4M3.4 12.6l1.4-1.4M11.2 4.8l1.4-1.4"/></symbol>
+    <symbol id="i-export" viewBox="0 0 16 16"><path d="M8 2v8M4.5 6.5L8 10l3.5-3.5M2.5 13h11"/></symbol>
+    <symbol id="i-help" viewBox="0 0 16 16"><path d="M6 6.2a2 2 0 114 0c0 1.4-2 1.5-2 3M8 12v.6"/><circle cx="8" cy="8" r="6.5"/></symbol>
+    <symbol id="i-chev" viewBox="0 0 16 16"><path d="M4 6l4 4 4-4"/></symbol>
+    <symbol id="i-star" viewBox="0 0 16 16"><path d="M8 1.8l1.9 4 4.3.5-3.2 3 .9 4.3L8 11.4l-3.9 2.2.9-4.3-3.2-3 4.3-.5z"/></symbol>
+    <symbol id="i-close" viewBox="0 0 16 16"><path d="M3.5 3.5l9 9M12.5 3.5l-9 9"/></symbol>
+  </defs>
+</svg>
+
+<div id="app">
+  <!-- Top app bar -->
+  <header class="appbar" role="banner">
+    <div class="brand" aria-label="TrickFire Robotics">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-name">TrickFire Robotics</span>
+    </div>
+    <span class="appbar-sep" aria-hidden="true"></span>
+    <label class="visually-hidden" for="project-title">Project title</label>
+    <input id="project-title" class="title-input" type="text" spellcheck="false" autocomplete="off">
+    <div class="appbar-actions">
+      <button class="btn" id="btn-undo" type="button" title="Undo (Ctrl+Z)"><svg class="ic" aria-hidden="true"><use href="#i-undo"/></svg><span>Undo</span></button>
+      <button class="btn" id="btn-redo" type="button" title="Redo (Ctrl+Y)"><svg class="ic" aria-hidden="true"><use href="#i-redo"/></svg><span>Redo</span></button>
+      <span class="appbar-sep" aria-hidden="true"></span>
+      <div class="menu-wrap">
+        <button class="btn" id="btn-file" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="menu-file"><svg class="ic" aria-hidden="true"><use href="#i-file"/></svg><span>File</span><svg class="ic ic-sm" aria-hidden="true"><use href="#i-chev"/></svg></button>
+        <div class="menu hidden" id="menu-file" role="menu" aria-label="File">
+          <button type="button" role="menuitem" data-file="new">New blank schedule</button>
+          <button type="button" role="menuitem" data-file="template">Load URC template</button>
+          <hr>
+          <button type="button" role="menuitem" data-file="open">Open JSON...</button>
+          <button type="button" role="menuitem" data-file="save">Save JSON <kbd>Ctrl+S</kbd></button>
+          <hr>
+          <button type="button" role="menuitem" data-file="import">Import CSV...</button>
+          <button type="button" role="menuitem" data-file="csv">Export CSV</button>
+        </div>
+      </div>
+      <button class="btn" id="btn-settings" type="button"><svg class="ic" aria-hidden="true"><use href="#i-gear"/></svg><span>Project settings</span></button>
+      <button class="btn primary" id="btn-export" type="button"><svg class="ic" aria-hidden="true"><use href="#i-export"/></svg><span>Export PDR page</span></button>
+      <div class="menu-wrap">
+        <button class="btn icon-only" id="btn-help" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="pop-help" title="Keyboard shortcuts (?)" aria-label="Keyboard shortcuts"><svg class="ic" aria-hidden="true"><use href="#i-help"/></svg></button>
+        <div class="menu popover hidden" id="pop-help" role="dialog" aria-label="Keyboard shortcuts">
+          <h3>Keyboard shortcuts</h3>
+          <dl class="keys">
+            <dt><kbd>Ctrl</kbd>+<kbd>Z</kbd></dt><dd>Undo</dd>
+            <dt><kbd>Ctrl</kbd>+<kbd>Y</kbd> / <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Z</kbd></dt><dd>Redo</dd>
+            <dt><kbd>Ctrl</kbd>+<kbd>S</kbd></dt><dd>Save JSON file</dd>
+            <dt><kbd>Enter</kbd></dt><dd>Commit a field; in a name cell, add a task below</dd>
+            <dt><kbd>Esc</kbd></dt><dd>Revert the field / cancel a drag</dd>
+            <dt><kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>Right</kbd> / <kbd>Left</kbd></dt><dd>Indent / outdent</dd>
+            <dt><kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>Up</kbd> / <kbd>Down</kbd></dt><dd>Move task up / down</dd>
+            <dt><kbd>Delete</kbd></dt><dd>Delete selected task (not while typing)</dd>
+            <dt><kbd>?</kbd></dt><dd>Show this panel</dd>
+          </dl>
+          <p class="pop-note">Timeline: drag a bar to move it, drag a bar end to resize. Summary bars move all of their children.</p>
+        </div>
+      </div>
+    </div>
+  </header>
+  <div class="accent-line" aria-hidden="true"></div>
+
+  <!-- Toolbar -->
+  <div class="toolbar" role="toolbar" aria-label="Schedule tools">
+    <div class="tb-group">
+      <button class="btn" id="btn-add" type="button" title="Add task after the selected one"><svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg><span>Add task</span></button>
+      <button class="btn" id="btn-sub" type="button" title="Add subtask under the selected task"><svg class="ic" aria-hidden="true"><use href="#i-sub"/></svg><span>Subtask</span></button>
+      <button class="btn" id="btn-ms" type="button" title="Add milestone"><svg class="ic" aria-hidden="true"><use href="#i-diamond"/></svg><span>Milestone</span></button>
+    </div>
+    <div class="tb-group">
+      <button class="btn" id="btn-indent" type="button" title="Indent (Alt+Shift+Right)"><svg class="ic" aria-hidden="true"><use href="#i-indent"/></svg><span>Indent</span></button>
+      <button class="btn" id="btn-outdent" type="button" title="Outdent (Alt+Shift+Left)"><svg class="ic" aria-hidden="true"><use href="#i-outdent"/></svg><span>Outdent</span></button>
+      <button class="btn" id="btn-moveup" type="button" title="Move up (Alt+Shift+Up)"><svg class="ic" aria-hidden="true"><use href="#i-up"/></svg><span>Up</span></button>
+      <button class="btn" id="btn-movedown" type="button" title="Move down (Alt+Shift+Down)"><svg class="ic" aria-hidden="true"><use href="#i-down"/></svg><span>Down</span></button>
+      <button class="btn danger" id="btn-delete" type="button" title="Delete selected task and its subtasks (Delete)"><svg class="ic" aria-hidden="true"><use href="#i-trash"/></svg><span>Delete</span></button>
+    </div>
+    <div class="tb-group" role="group" aria-label="Zoom, pixels per day">
+      <span class="tb-label">Zoom</span>
+      <div class="seg" id="zoom-seg">
+        <button class="btn" type="button" data-zoom="3" aria-pressed="false" title="3 px per day">3</button>
+        <button class="btn" type="button" data-zoom="6" aria-pressed="false" title="6 px per day">6</button>
+        <button class="btn" type="button" data-zoom="10" aria-pressed="false" title="10 px per day">10</button>
+        <button class="btn" type="button" data-zoom="16" aria-pressed="false" title="16 px per day">16</button>
+      </div>
+      <button class="btn" id="btn-today" type="button" title="Scroll the timeline to the status date"><svg class="ic" aria-hidden="true"><use href="#i-cal"/></svg><span>Today</span></button>
+    </div>
+    <div class="tb-group">
+      <button class="btn" id="btn-deps" type="button" aria-pressed="true" title="Show dependency arrows"><svg class="ic" aria-hidden="true"><use href="#i-link"/></svg><span>Dependencies</span></button>
+      <button class="btn" id="btn-crit" type="button" aria-pressed="true" title="Highlight the critical path"><svg class="ic" aria-hidden="true"><use href="#i-flag"/></svg><span>Critical path</span></button>
+      <button class="btn" id="btn-auto" type="button" title="Shift tasks later so no dependency is violated"><svg class="ic" aria-hidden="true"><use href="#i-bolt"/></svg><span>Auto-schedule</span></button>
+    </div>
+  </div>
+
+  <!-- Main split: grid | timeline -->
+  <main class="main" id="main">
+    <section class="grid-pane" id="grid-pane" aria-label="Task grid">
+      <div class="grid-inner">
+        <div class="grid-head" id="grid-head" role="row">
+          <div class="c h-wbs">WBS</div>
+          <div class="c h-name">Task</div>
+          <div class="c h-owner">Owner</div>
+          <div class="c h-start">Start</div>
+          <div class="c h-end">End</div>
+          <div class="c h-days">Days</div>
+          <div class="c h-pct">%</div>
+          <div class="c h-deps" title="Predecessor WBS numbers, e.g. 2.1, 3.4+2, 5.2-1">Depends on</div>
+        </div>
+        <div class="grid-body" id="grid-body"></div>
+      </div>
+    </section>
+    <div class="splitter" id="splitter" role="separator" aria-orientation="vertical" aria-label="Resize task grid" tabindex="0"></div>
+    <section class="tl-pane" id="tl-pane" aria-label="Timeline">
+      <div class="tl-head" id="tl-head"></div>
+      <div class="tl-body" id="tl-body"></div>
+    </section>
+  </main>
+
+  <!-- Status bar -->
+  <footer class="statusbar" id="statusbar" role="status">
+    <span id="st-tasks"></span>
+    <span id="st-finish"></span>
+    <span id="st-crit"></span>
+    <button type="button" class="st-viol" id="st-viol"></button>
+    <span class="st-spacer"></span>
+    <span id="st-save"></span>
+  </footer>
+</div>
+
+<datalist id="owners-list"></datalist>
+<input type="file" id="file-json" accept=".json,application/json" hidden>
+<input type="file" id="file-csv" accept=".csv,text/csv" hidden>
+<input type="file" id="file-logo" accept="image/*" hidden>
+
+<!-- Project settings -->
+<dialog id="dlg-settings" aria-labelledby="dlg-settings-h">
+  <form id="form-settings" novalidate>
+    <h2 id="dlg-settings-h">Project settings</h2>
+    <div class="form-grid">
+      <label for="set-title">Title</label>
+      <input id="set-title" type="text" autocomplete="off">
+      <label for="set-team">Team</label>
+      <input id="set-team" type="text" autocomplete="off">
+      <label for="set-start">Chart start</label>
+      <input id="set-start" type="date">
+      <label for="set-end">Chart end</label>
+      <input id="set-end" type="date">
+      <label for="set-status">Status date</label>
+      <div class="inline">
+        <input id="set-status" type="date">
+        <button class="btn" type="button" id="set-status-clear" title="Leave empty to use today's date">Use today</button>
+      </div>
+      <label for="btn-logo">Logo</label>
+      <div class="inline">
+        <span class="logo-prev" id="logo-prev" aria-hidden="true"></span>
+        <button class="btn" type="button" id="btn-logo">Upload image...</button>
+        <button class="btn" type="button" id="btn-logo-remove">Remove</button>
+      </div>
+    </div>
+    <p class="form-error" id="set-error" role="alert"></p>
+    <div class="dlg-actions">
+      <button class="btn" type="button" data-close>Cancel</button>
+      <button class="btn primary" type="submit">Apply</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- Export PDR page -->
+<dialog id="dlg-export" class="dlg-wide" aria-labelledby="dlg-export-h">
+  <div class="dlg-head">
+    <h2 id="dlg-export-h">Export PDR page</h2>
+    <button class="btn icon-only" type="button" data-close aria-label="Close"><svg class="ic" aria-hidden="true"><use href="#i-close"/></svg></button>
+  </div>
+  <div class="export-body">
+    <div class="export-controls">
+      <fieldset>
+        <legend>Orientation</legend>
+        <label class="opt"><input type="radio" name="ex-orient" value="landscape" checked> Landscape (1056 x 816)</label>
+        <label class="opt"><input type="radio" name="ex-orient" value="portrait"> Portrait (816 x 1056)</label>
+      </fieldset>
+      <fieldset>
+        <legend>Theme</legend>
+        <label class="opt"><input type="radio" name="ex-theme" value="light" checked> Light (white page)</label>
+        <label class="opt"><input type="radio" name="ex-theme" value="dark"> Dark</label>
+      </fieldset>
+      <fieldset>
+        <legend>Show</legend>
+        <label class="opt"><input type="checkbox" id="ex-deps" checked> Dependencies</label>
+        <label class="opt"><input type="checkbox" id="ex-legend" checked> Legend</label>
+      </fieldset>
+      <div class="ex-warn hidden" id="ex-warn" role="alert">
+        Too many rows for one page: text will be too small to read. Collapse summary groups (collapsed groups hide their children on the exported page).
+      </div>
+      <div class="inline wrap">
+        <button class="btn" type="button" id="ex-collapse">Collapse all groups</button>
+        <button class="btn" type="button" id="ex-expand">Expand all</button>
+      </div>
+      <div class="ex-actions">
+        <button class="btn primary" type="button" id="ex-print">Print / Save as PDF</button>
+        <button class="btn" type="button" id="ex-png">Download PNG</button>
+        <button class="btn" type="button" id="ex-svg">Download SVG</button>
+      </div>
+      <p class="hint">For "Print / Save as PDF", choose the browser's "Save as PDF" destination, set Margins to None and turn on Background graphics.</p>
+    </div>
+    <div class="export-preview" id="ex-frame" aria-label="Page preview">
+      <div class="pv-page" id="ex-page"></div>
+    </div>
+  </div>
+</dialog>
+
+<!-- Confirm -->
+<dialog id="dlg-confirm" aria-labelledby="dlg-confirm-h" aria-describedby="dlg-confirm-msg">
+  <form method="dialog">
+    <h2 id="dlg-confirm-h">Confirm</h2>
+    <p id="dlg-confirm-msg"></p>
+    <div class="dlg-actions">
+      <button class="btn" type="submit" value="cancel" id="confirm-cancel">Cancel</button>
+      <button class="btn primary" type="submit" value="ok" id="confirm-ok">OK</button>
+    </div>
+  </form>
+</dialog>
+
+<div id="toasts" class="toasts" aria-live="polite"></div>
+<div id="drag-tip" class="drag-tip hidden" aria-hidden="true"></div>
+
+<script src="js/dates.js"></script>
+<script src="js/model.js"></script>
+<script src="js/cpm.js"></script>
+<script src="js/store.js"></script>
+<script src="js/render.js"></script>
+<script src="js/export.js"></script>
+<script src="js/app.js"></script>
+
+<div id="print-root"></div>
+</body>
+</html>
