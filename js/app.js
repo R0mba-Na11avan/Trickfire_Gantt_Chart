@@ -552,6 +552,34 @@
     commit(p);
   }
 
+  // ---------------------------------------------------------------- timeline pan (hold and drag empty space)
+  let pan = null;
+
+  function startPan(e, clickId) {
+    if (e.button !== 0) return;
+    e.preventDefault(); // no text selection / native image drag while panning
+    pan = { x0: e.clientX, y0: e.clientY, sl: el.tlBody.scrollLeft, st: el.tlBody.scrollTop, moved: false, clickId };
+  }
+  function onPanMove(e) {
+    if (!pan) return;
+    const dx = e.clientX - pan.x0, dy = e.clientY - pan.y0;
+    if (!pan.moved) {
+      if (Math.abs(dx) < 3 && Math.abs(dy) < 3) return;
+      pan.moved = true;
+      document.body.classList.add('is-panning');
+    }
+    // the scroll listeners keep the header strip and the grid in sync
+    el.tlBody.scrollLeft = pan.sl - dx;
+    el.tlBody.scrollTop = pan.st - dy;
+  }
+  function endPan() {
+    if (!pan) return;
+    const p = pan;
+    pan = null;
+    document.body.classList.remove('is-panning');
+    if (!p.moved && p.clickId) select(p.clickId);
+  }
+
   // ---------------------------------------------------------------- timeline drag
   let drag = null;
 
@@ -561,10 +589,10 @@
     const handle = e.target.closest('.tf-handle');
     const bar = e.target.closest('.tf-bar');
     if (!bar && !handle) {
-      // empty area: select the row under the pointer
+      // empty area: hold and drag pans the view; a plain click selects the row under the pointer
       const y = e.clientY - el.tlBody.getBoundingClientRect().top + el.tlBody.scrollTop;
       const r = visibleRows[geom.rowAtY(y)];
-      if (r) select(r.task.id);
+      startPan(e, r ? r.task.id : null);
       return;
     }
     const barEl = bar || handle.closest('.tf-bar');
@@ -974,9 +1002,10 @@
 
     // timeline drag: pointerdown on the (persistent) scroller, move/up on the document
     el.tlBody.addEventListener('pointerdown', onTimelinePointerDown);
-    document.addEventListener('pointermove', onDragMove);
-    document.addEventListener('pointerup', () => endDrag(true));
-    document.addEventListener('pointercancel', () => endDrag(false));
+    el.tlHead.addEventListener('pointerdown', (e) => startPan(e, null));
+    document.addEventListener('pointermove', (e) => { onDragMove(e); onPanMove(e); });
+    document.addEventListener('pointerup', () => { endDrag(true); endPan(); });
+    document.addEventListener('pointercancel', () => { endDrag(false); endPan(); });
     document.addEventListener('keydown', onKeydown);
     window.addEventListener('error', (e) => toast('Unexpected error: ' + e.message, 'error'));
 

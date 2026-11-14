@@ -219,19 +219,28 @@ kbd {
 .tl-head { flex: none; height: var(--header-h); overflow: hidden; background: var(--bg-deep); border-bottom: 1px solid var(--white); }
 .tl-body { flex: 1 1 auto; min-height: 0; overflow: scroll; position: relative; }
 .tl-head svg, .tl-body svg { display: block; }
-.tl-body .tf-bar, .tl-body .tf-bar-body { cursor: grab; }
+.tl-body svg, .tl-head svg { cursor: grab; }
+.tl-body .tf-bar, .tl-body .tf-bar-body { cursor: move; }
 .tl-body .tf-handle { cursor: ew-resize; }
 body.is-dragging, body.is-dragging * { cursor: grabbing !important; user-select: none; }
+body.is-panning, body.is-panning * { cursor: grabbing !important; user-select: none; }
 body.is-dragging.drag-resize, body.is-dragging.drag-resize * { cursor: ew-resize !important; }
 body.is-splitting, body.is-splitting * { cursor: col-resize !important; user-select: none; }
 
 /* Scrollbars */
-.tl-body, .grid-pane { scrollbar-color: #555 #1a1a1a; }
-.tl-body::-webkit-scrollbar, .grid-pane::-webkit-scrollbar { width: 12px; height: 12px; }
-.tl-body::-webkit-scrollbar-track, .grid-pane::-webkit-scrollbar-track { background: #1a1a1a; }
-.tl-body::-webkit-scrollbar-thumb, .grid-pane::-webkit-scrollbar-thumb { background: #555; border: 2px solid #1a1a1a; }
-.tl-body::-webkit-scrollbar-thumb:hover, .grid-pane::-webkit-scrollbar-thumb:hover { background: #777; }
-.tl-body::-webkit-scrollbar-corner, .grid-pane::-webkit-scrollbar-corner { background: #1a1a1a; }
+/* Scrollbars: square, dark track, thumb lights up TrickFire green when used. Applies to every scroller. */
+* { scrollbar-width: auto; }
+::-webkit-scrollbar { width: 12px; height: 12px; }
+::-webkit-scrollbar-track { background: var(--bg-deep); border: 1px solid #2c2c2c; }
+::-webkit-scrollbar-thumb { background: #4a4a4a; border: 3px solid var(--bg-deep); border-radius: 0; }
+::-webkit-scrollbar-thumb:hover { background: #8a8a8a; }
+::-webkit-scrollbar-thumb:active { background: var(--green); }
+::-webkit-scrollbar-corner { background: var(--bg-deep); }
+::-webkit-scrollbar-button { display: none; }
+/* Firefox has no ::-webkit-scrollbar; setting scrollbar-color elsewhere would switch the rules above off. */
+@supports not selector(::-webkit-scrollbar) {
+  * { scrollbar-color: #4a4a4a #151515; }
+}
 
 .drag-tip {
   position: fixed; z-index: 90; pointer-events: none; padding: 3px 8px;
