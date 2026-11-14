@@ -219,7 +219,6 @@ kbd {
 .tl-head { flex: none; height: var(--header-h); overflow: hidden; background: var(--bg-deep); border-bottom: 1px solid var(--white); }
 .tl-body { flex: 1 1 auto; min-height: 0; overflow: scroll; position: relative; }
 .tl-head svg, .tl-body svg { display: block; }
-.tl-body svg, .tl-head svg { cursor: grab; }
 .tl-body .tf-bar, .tl-body .tf-bar-body { cursor: move; }
 .tl-body .tf-handle { cursor: ew-resize; }
 body.is-dragging, body.is-dragging * { cursor: grabbing !important; user-select: none; }
